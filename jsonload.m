@@ -22,7 +22,7 @@ if ~exist(fname, 'file')
 end
 
 % Read JSON file in as a string.
-f = fopen(fname);
+f = fopen(fname, 'r');
 s = fread(f, '*char')';
 
 % Now parse it.
