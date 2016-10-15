@@ -1,6 +1,6 @@
 [
   {
-    "capture_time_s": 16.7,
+    "capture_time_s": 15,
     "sample_rate_hz": 20,
     "roll_rad": [
       0.8147,
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "capture_time_s": 21.3,
+    "capture_time_s": 20,
     "sample_rate_hz": 25,
     "roll_rad": [
       0.5470,
@@ -276,8 +276,8 @@
     ]
   },
   {
-    "capture_time_s": 21.3,
-    "sample_rate_hz": 25,
+    "capture_time_s": 25,
+    "sample_rate_hz": 100,
     "roll_rad": [
       0.1576,
       0.9706,
