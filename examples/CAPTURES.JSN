@@ -1,8 +1,8 @@
 [
   {
     "start_time_s": 5,
-    "end_time_s": 7.5,
     "sample_rate_hz": 20,
+    "length": 50,
     "x": [
       80,
       103,
@@ -162,8 +162,8 @@
   },
   {
     "start_time_s": 10,
-    "end_time_s": 13.5,
     "sample_rate_hz": 12,
+    "length": 42,
     "x": [
       -22,
       -116,
@@ -299,8 +299,8 @@
   },
   {
     "start_time_s": 15,
-    "end_time_s": 16.2,
     "sample_rate_hz": 30,
+    "length": 35,
     "x": [
       100,
       -43,

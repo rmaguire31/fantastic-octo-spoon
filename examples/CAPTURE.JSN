@@ -1,8 +1,8 @@
 [
   {
     "start_time_s": 5,
-    "end_time_s": 7.5,
     "sample_rate_hz": 20,
+    "length": 50,
     "x": [
       80,
       103,
