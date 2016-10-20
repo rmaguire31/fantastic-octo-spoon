@@ -101,5 +101,6 @@ function analyse
     fprintf('Minimum Pitching Acceleration is: %\n', min_p);
     fprintf('Minimum Rolling Acceleration is: %\n\n', min_r);    
     
+    
     end
     
