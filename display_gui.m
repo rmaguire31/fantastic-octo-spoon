@@ -38,9 +38,14 @@ end
 
 function init_gui()
     
-    f = figure;
+    f = uifigure;
+    f.Position = [404, 250, 560, 420];
+    f.Pointer = 'crosshair';
+    
     tab_group = uitabgroup('Parent', f);
     tab1 = uitab('Parent', tab_group, 'Title', 'Capture 1');
-    tab_group.Position = [1, 1, 8, 1];
-    %side_panel = uipanel('
+
+    %side_panel = uipanel(f, 'Position', [300, 20, 20, 400]);
+    
+    %btn = uibutton(side_side_panel, 'Text', 'Load', 'Position', [300, 20, 20, 20]);
 end
