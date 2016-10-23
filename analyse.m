@@ -1,106 +1,79 @@
-%% analyse
-%
+%% Analysis
+
 % DESCRIPTION
-%   Analyse and display acceleration data having loaded it from JSONLOAD.
-%
+%  Load data from JSONLOAD, conduct analysis and display plots
 % INPUTS
-%   json - MATLAB object representing JSON file.
-%
+%  json - MATLAB object representing JSON file
+%  roll - Roll time series
+%  pitch - Pitch time series
+%  roll_f - Roll in frequency domain
+%  pitch_ f - Pitch in frequency domain
+%  t0 - Starting time
+%  Fs - Sample rate
 % OUTPUTS
-%   Various subplots, and technically relevant data statistics:
-%   mean_p - mean pitching acceleration
-%   mean_r - mean rolling acceleration
-%   var_p - variance of rolling acceleration
-%   var_r - variance of pitching acceleration
-%
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller & Tom Poon 2016
+%  mean_p - Mean pitch
+%  mean_r - Mean roll
+%  var_p - Variance of roll
+%  var_r - Variance of pitch
+%  t - Time vector
+%  f - Domain
 
-function analyse
 
-    capture = 'examples/CAPTURE.JSN';               %example data file on GIT
-    json = jsonload(capture);
-    
-    r = json.roll_rad;                              %roll
-    p = json.pitch_rad;                             %pitch
-    t = json.end_time - json.start_time;            %time
-    f = json.sample_rate_hz;                       %sample rate
+function [t,f,mean_p,mean_r,var_p,var_r] = analyse(json,roll,pitch,roll_f,pitch_f,t0,Fs)
+load json
+T = 1/Fs; % Time period 
+t = (0:L-1)'*T + t0; % Time vector
+f = Fs*(0:L/2)'/L; % Define frequency domain
 
-    subplot(4,1,1);
-    plot(t,r);
-    title('Roll Time Domain');
-    xlabel('Time(s)');
-    ylabel('Rolling Acceleration(ms^2)');
+subplot(4,1,1); % Display several plots at once
+plot(t,roll);
+title('Roll Time Series');
+xlabel('t(s)');
+ylabel('Roll Acceleration(ms^2)');
     
-    subplot(4,1,2);
-    plot(f,r);
-    title('Roll Frequency Domain');
-    xlabel('Frequency(Hz)');
-    ylabel('Rolling Acceleration(ms^2)');
+subplot(4,1,2);
+plot(f,roll_f);
+title('Single-Sided Amplitude Spectrum of Roll(t)')
+xlabel('f(Hz)');
+ylabel('|P1(f)|');
     
-    subplot(4,1,3);
-    plot(t,p)
-    title('Pitch Time Domain');
-    xlabel('Time(s)');
-    ylabel('Pitching Acceleration(ms^2)');
+subplot(4,1,3);
+plot(t,pitch)
+title('Pitch Time Series');
+xlabel('t(s)');
+ylabel('Pitch Acceleration(ms^2)');
     
-    subplot(4,1,4);
-    plot(f,p);
-    title('Pitch frequency Domain');
-    xlabel('Frequency(Hz)');
-    ylabel('Pitching Acceleration(ms^2)');
+subplot(4,1,4);
+plot(f,pitch_f);
+title('Single-Sided Amplitude Spectrum of Pitch(t)')
+xlabel('f(Hz)');
+ylabel('|P1(f)|');
     
-    mean_p = mean(p); 
-    fprintf('Mean of Pitching Acceleration is: %\n', mean_p);
-    mean_r = mean(r); 
-    fprintf('Mean of Rolling Acceleration is: %\n\n', mean_r);
-    var_p = var(p);
-    fprintf('Variance of Pitching Acceleration is: %\n', var_p);
-    var_r = var(r); 
-    fprintf('Variance of Rolling Acceleration is: %\n\n', var_r);
-    
-    num_samples = floor(t / f); 
-       
-    peak_p = 0;
-    peak_r = 0;
-    min_p = 0;
-    min_r = 0;
-    p_i = 0;                    %markers to log i
-    r_i = 0;
-    
-    for i = (0:1:num_samples)
-        if p(i) > peak_p
-            p(i) = peak_p;
-            p_i = i;
-        end
-        if r(i) > peak_r
-            r(i) = peak_r;
-            r_i = i;
-        end
-        if p(i) < min_r
-            p(i) = min_r;
-        end
-        if r(i) < min_r
-            r(i) = min_r;
-        end
-        % attempt to calculate peak-to-peak values
-        dist_peak_p = 0;
-        dist_peak_r = 0;
-        
-        if p(i) > (0.9 * peak_p)
-            dist_peak_p = p_i - i;
-            fprintf('Peak to Peak Pitch Value is: %\n', dist_peak_p);
-        end
-            
-        if r(i) > (0.9 * peak_r)
-            dist_peak_r = r_i - i;
-            fprintf('Peak to Peak Roll Value is: %\n', dist_peak_r);
-        end
+mean_p = mean(pitch); % Conduct statistical analysis
+fprintf('Mean of Pitch Acceleration is: %\n', mean_p);
+mean_r = mean(roll); 
+fprintf('Mean of Roll Acceleration is: %\n\n', mean_r);
+var_p = var(pitch);
+fprintf('Variance of Pitch Acceleration is: %\n', var_p);
+var_r = var(roll); 
+fprintf('Variance of Roll Acceleration is: %\n\n', var_r);
 
-    fprintf('Peak Pitching Acceleration is: %\n', peak_p);
-    fprintf('Peak Rolling Acceleration is: %\n\n', peak_r);
-    fprintf('Minimum Pitching Acceleration is: %\n', min_p);
-    fprintf('Minimum Rolling Acceleration is: %\n\n', min_r);    
+num_samples = floor(t/f); % Define time intervals 
+select = json(0:1:num_samples); % Select range of spectrum 
+[pks,locs] = findpeaks(select,Fs,'MinPeakDistance',0.005); 
+
+% Choose tallest peak
+% Eliminate all peaks within 5 ms of it
+% Repeat procedure for the tallest remaining peak
+% Iterate until there are no more peaks to consider
+
+text(locs+.02,pks,num2str((1:numel(pks))')) % Label peaks
+
+end
+
+
+
+
+
     
-    
-    end
     
