@@ -59,8 +59,11 @@ var_r = var(roll);
 fprintf('Variance of Roll Acceleration is: %\n\n', var_r);
 
 num_samples = floor(t/f); % Define time intervals 
-select = json(0:1:num_samples); % Select range of spectrum 
+select = json(roll_f(0:1:num_samples)); % Select range of spectrum 
 [pks,locs] = findpeaks(select,Fs,'MinPeakDistance',0.005); 
+
+select2 = json(pitch_f(0:1:num_samples)); 
+[pks2,locs2] = findpeaks(select2,Fs,'MinPeakDistance',0.005); 
 
 % Choose tallest peak
 % Eliminate all peaks within 5 ms of it
@@ -68,6 +71,7 @@ select = json(0:1:num_samples); % Select range of spectrum
 % Iterate until there are no more peaks to consider
 
 text(locs+.02,pks,num2str((1:numel(pks))')) % Label peaks
+text(locs2+.02,pks2,num2str((1:numel(pks2))'))
 
 end
 
