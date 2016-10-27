@@ -38,14 +38,23 @@ end
 
 function init_gui()
     
-    f = uifigure;
-    f.Position = [404, 250, 560, 420];
+    f = figure;                             %uifigure?? no toolbar
+    f.Position = [404, 250, 760, 420];      %[position from left, bottom, width, height]
     f.Pointer = 'crosshair';
+    f.Name = 'Acceleration Data Capture Program';
+    %f.Color = [0.4 0 0.8];``               %want to change background colour?
     
-    tab_group = uitabgroup('Parent', f);
+    tab_group = uitabgroup(f);
     tab1 = uitab('Parent', tab_group, 'Title', 'Capture 1');
+    tab2 = uitab('Parent', tab_group, 'Title', 'Capture 2');
+    %tab1.Position = [410, 260, 300, 420];
 
-    %side_panel = uipanel(f, 'Position', [300, 20, 20, 400]);
+    side_panel = uipanel(f, 'Title', 'Options', 'FontSize', 12, 'BackgroundColor', [0.4 0 0.8]);
+    side_panel.Position = [710 260 260 420];
+    btn = uibutton(side_panel, 'Text', 'Load');
     
-    %btn = uibutton(side_side_panel, 'Text', 'Load', 'Position', [300, 20, 20, 20]);
+    %'Position', [0, 20, 20, 20]);
+    
 end
+
+%Imi sucks  #check
