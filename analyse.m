@@ -17,22 +17,22 @@ function [mean_p,mean_r,var_p,var_r] = analyse(roll,pitch,roll_f,pitch_f,t,f)
 
 subplot(4,1,1); % Display several plots at once
 plot(t,roll);
-[pks,locs] = findpeaks(roll,t);
-findpeaks(roll, t);
+[pks,locs] = findpeaks(roll,t,'SortStr','descend');
+findpeaks(roll,t);
 
 % Choose tallest peak
 % Repeat procedure for the tallest remaining peak
 % Iterate until there are no more peaks to consider
 
-text(locs,pks,num2str((1:numel(pks))')); % Label peaks
+text(locs,pks,num2str((1:numel(pks))')); % Label peaks and sort the peaks from tallest to shortest
 title('Roll Time Series');
 xlabel('t(s)');
 ylabel('Roll Acceleration(ms^2)');
     
 subplot(4,1,2);
 plot(f,roll_f);
-[pks2,locs2] = findpeaks(roll_f,f);
-findpeaks(roll_f, f);
+[pks2,locs2] = findpeaks(roll_f,f,'SortStr','descend');
+findpeaks(roll_f,f);
 text(locs2,pks2,num2str((1:numel(pks2))'));
 title('Single-Sided Amplitude Spectrum of Roll(t)');
 xlabel('f(Hz)');
@@ -40,8 +40,8 @@ ylabel('|P1(f)|');
     
 subplot(4,1,3);
 plot(t,pitch);
-[pks3,locs3] = findpeaks(pitch,t);
-findpeaks(pitch, t);
+[pks3,locs3] = findpeaks(pitch,t,'SortStr','descend');
+findpeaks(pitch,t);
 text(locs3,pks3,num2str((1:numel(pks3))'));
 title('Pitch Time Series');
 xlabel('t(s)');
@@ -49,7 +49,7 @@ ylabel('Pitch Acceleration (ms^2)');
 
 subplot(4,1,4);
 plot(f,pitch_f);
-[pks4,locs4] = findpeaks(pitch_f,f);
+[pks4,locs4] = findpeaks(pitch_f,f,'SortStr','descend');
 findpeaks(pitch_f,f);
 text(locs4,pks4,num2str((1:numel(pks4))'));
 title('Single-Sided Amplitude Spectrum of Pitch(t)');
