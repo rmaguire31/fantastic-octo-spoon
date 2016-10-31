@@ -28,7 +28,7 @@ pitch = atan(Gy ./ sqrt(Gx.^2 + Gz.^2)); % Compute pitch
 
 end
 
-%%  Fourier Fast Transform 
+%%  Fourier Transform 
 %
 %   DESCRIPTION
 %    Collect roll and pitch time series' and perform fft 
