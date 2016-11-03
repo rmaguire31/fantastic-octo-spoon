@@ -17,7 +17,7 @@ function [mean_p,mean_r,var_p,var_r] = analyse(roll,pitch,roll_f,pitch_f,t,f)
 
 subplot(4,1,1); % Display several plots at once
 plot(t,roll);
-[pks,locs] = findpeaks(roll,t,'SortStr','descend');
+[pks,locs] = findpeaks(roll,t, 'SortStr','descend');
 findpeaks(roll,t);
 
 % Choose tallest peak

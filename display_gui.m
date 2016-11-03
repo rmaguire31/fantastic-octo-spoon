@@ -150,9 +150,3 @@ function [t_start, t_end, freq, cap_num, cap_inter] = settings(t_start, ...
     % delete 5 lines above when no errors
 
 end 
-
-
-
-
-
-%Imi sucks  #check
