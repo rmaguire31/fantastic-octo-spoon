@@ -1,20 +1,24 @@
-%% Post Process
+function [t,roll,pitch,f,roll_f,pitch_f] = postprocess(t0,Fs,x,y,z)
+%% POSTPROCESS
 %
-%  DESCRIPTION
-%   Process data acquired from capture and configuration files and convert into roll and pitch
-%  INPUTS
+% DESCRIPTION
+%   Process data acquired from capture and configuration files and convert
+%   into roll and pitch
+%
+% INPUTS
 %   x,y,z - Raw data captured in each plane
 %   t0 - Starting time 
 %   Fs - Sample rate
-%  OUTPUTS
+%
+% OUTPUTS
 %   roll - Roll time series
 %   pitch - Pitch time series
 %   roll_f - Roll in frequency domain
 %   pitch_ f - Pitch in frequency domain
-%   f - Domain
+%   f - Frequency Domain
 %   t - Time vector
-
-function [roll,pitch,roll_f,pitch_f,t,f] = postprocess(x,y,z,t0,Fs)
+%
+% COPYRIGHT (C) Lauren Miller 2016
 
 Gx = 2 * 9.81 * x / 2^7; % Data in terms of gravity
 Gy = 2 * 9.81 * y / 2^7;
@@ -28,21 +32,22 @@ pitch = atan(Gy ./ sqrt(Gx.^2 + Gz.^2)); % Compute pitch
 
 end
 
-%%  Fourier Transform 
-%
-%   DESCRIPTION
-%    Collect roll and pitch time series' and perform fft 
-%   INPUTS
-%    data1 - Original time series aquired
-%    Fs - Sample rate 
-%    t0 - Starting time
-%   OUTPUTS
-%    data1 - Original time series aquired
-%    f - Domain
-%    P1 - Spectrum
-%    t - Time vector
-
 function [f,P1,t,data] = frequency(data,Fs,t0)
+%% FREQUENCY 
+%
+% DESCRIPTION
+%   Collect roll and pitch time series' and perform fft
+%
+% INPUTS
+%   data1 - Original time series aquired
+%   Fs - Sample rate 
+%   t0 - Starting time
+%
+% OUTPUTS
+%   data1 - Original time series aquired
+%   f - Frequency Domain
+%   P1 - Spectrum
+%   t - Time vector
 
 L = length(data); % Length of signal
 T = 1/Fs; % Time period 

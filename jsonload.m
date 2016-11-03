@@ -25,6 +25,10 @@ end
 f = fopen(fname, 'r');
 s = fread(f, '*char')';
 
+if isempty(s)
+    error('jsonload:fileNotFound', 'Empty file %s', fname);
+end
+
 % Now parse it.
 json = parsejson(1);
 
