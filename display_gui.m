@@ -410,6 +410,7 @@ for i = 1:length(config)
         config{i}.start_time_s + config{i}.length/config{i}.sample_rate_hz;
 end
 
+<<<<<<< HEAD
 prompts = {
     'Capture Start Time (s):',...
     'Capture End Time (s):',...

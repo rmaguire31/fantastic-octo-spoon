@@ -1,19 +1,7 @@
-%% Analysis
-
-% DESCRIPTION
-%  Load data from JSONLOAD, conduct analysis and display plots
-% INPUTS
-%  roll - Roll time series
-%  pitch - Pitch time series
-%  roll_f - Roll in frequency domain
-%  pitch_ f - Pitch in frequency domain
-% OUTPUTS
-%  mean_p - Mean pitch
-%  mean_r - Mean roll
-%  var_p - Variance of roll
-%  var_r - Variance of pitch
-
 function [t_mean, t_var, t_peaks, t_locs, f_peaks, f_locs] = analyse(t, data_t, f, data_f)
+%% ANALYSE
+%
+%  TODO(LAUREN)
 
 % Conduct statistical analysis
 % Take absolute values
