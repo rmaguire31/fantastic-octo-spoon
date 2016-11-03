@@ -56,22 +56,22 @@ bytes = 0;
 gui_alive = 1;
 while (gui_alive)
     drawnow();
-%     capture_finfo = dir(default_capture_fname);
-%     if isempty(capture_finfo)
-%         bytes = 0;
-%         
-%     elseif capture_finfo.bytes < bytes
-%         % New capture has been started.
-%         bytes = capture_finfo.bytes;
-%         
-%     elseif capture_finfo.bytes > bytes
-%         % File has been updated.
-%         bytes = capture_finfo.bytes;
-%         
-%         % Update tabs.
-%         capture_fname = default_capture_fname;
-%         update_capture_tabs(capture_fname, capture_tabgroup);
-%     end
+    capture_finfo = dir(default_capture_fname);
+    if isempty(capture_finfo)
+        bytes = 0;
+        
+    elseif capture_finfo.bytes < bytes
+        % New capture has been started.
+        bytes = capture_finfo.bytes;
+        
+    elseif capture_finfo.bytes > bytes
+        % File has been updated.
+        bytes = capture_finfo.bytes;
+        
+        % Update tabs.
+        capture_fname = default_capture_fname;
+        update_capture_tabs(capture_fname, capture_tabgroup);
+    end
 end
 
     function load_capture()
