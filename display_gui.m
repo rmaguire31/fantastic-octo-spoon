@@ -11,12 +11,9 @@ function display_gui(mbed_path, config_fname, default_capture_fname)
 %       containing capture definitions.
 %   default_capture_fname - Name of the capture file written by the
 %       microcontroller and read to extract capture data.
-%
-% OUTPUTS
 %   
-%  
 % COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-%   2016
+% 2016
 
 % Sanity check inputs.
 if nargin < 1 || isempty(mbed_path)
@@ -47,10 +44,12 @@ capture_tabgroup = init_gui(...
     @load_capture,...
     @save_capture,...
     @()set_config(config_fname),...
-    @close_func...
+    @close_func,...
+    @toggle_units...
 );
 capture_fname = default_capture_fname;
-update_capture_tabs(capture_fname, capture_tabgroup);
+units = 'deg';
+update_capture_tabs(capture_fname, capture_tabgroup, units);
 
 bytes = 0;
 gui_alive = 1;
@@ -70,7 +69,7 @@ while (gui_alive)
         
         % Update tabs.
         capture_fname = default_capture_fname;
-        update_capture_tabs(capture_fname, capture_tabgroup);
+        update_capture_tabs(capture_fname, capture_tabgroup, units);
     end
 end
 
@@ -78,7 +77,7 @@ end
     [fname, path, idx] = uigetfile({'*.json', '*.JSN'}, 'Load Capture');
     if idx > 0
         capture_fname = [fname, path];
-        update_capture_tabs(capture_fname, capture_tabgroup);
+        update_capture_tabs(capture_fname, capture_tabgroup, units);
     end
     end
 
@@ -104,12 +103,22 @@ end
     end
     end
 
+    function toggle_units()
+        switch units
+            case {'rad'}
+                units = 'deg';
+            case {'deg'}
+                units = 'rad';
+        end
+        update_capture_tabs(capture_fname, capture_tabgroup, units);
+    end
+
     function close_func()
         gui_alive = 0;
     end
 end
 
-function capture_tabgroup = init_gui(load_func, save_func, settings_func, close_func)
+function capture_tabgroup = init_gui(load_func, save_func, settings_func, close_func, units_func)
 %% INIT_GUI
 %
 %
@@ -146,6 +155,14 @@ settings_btn.Units = 'normalized';
 settings_btn.Position = [0.05 0.63 0.9 0.1];
 settings_btn.Callback = @(h,data)settings_func();
 
+units_btn = uicontrol(option_panel);
+units_btn.Style = 'togglebutton';
+units_btn.String = 'Toggle Units';
+units_btn.Units = 'normalized';
+units_btn.Position = [0.05 0.525 0.9 0.1];
+units_btn.Callback = @(h,data)units_func();
+
+
 % Capture tabs.
 capture_tabgroup = uitabgroup(f);
 capture_tabgroup.Position = [0.01 0.01 0.8 0.98];
@@ -153,7 +170,7 @@ capture_tabgroup.Position = [0.01 0.01 0.8 0.98];
 f.Visible = 'on';
 end
 
-function update_capture_tabs(capture_fname, capture_tabgroup)
+function update_capture_tabs(capture_fname, capture_tabgroup, units)
 %% UPDATE_CAPTURE_TABS
 %
 %
@@ -189,6 +206,14 @@ for i = 1:length(captures)
         raw_captures{i}.y,...
         raw_captures{i}.z...
     );
+
+    % Convert to degrees if necessary.
+    switch units
+        case {'rad'}
+        case {'deg'}
+            captures{i}.roll = rad2deg(captures{i}.roll);
+            captures{i}.pitch = rad2deg(captures{i}.pitch);
+    end
 
     captures{i}.stats = struct();
     % Analyse roll.
@@ -261,7 +286,7 @@ else
         traces = [captures{i}.roll, captures{i}.pitch];
         plot(t_axes, captures{i}.t, traces);
         xlabel(t_axes, 'Time (s)');
-        ylabel(t_axes, 'Orientation (deg)');
+        ylabel(t_axes, sprintf('Orientation (%s)', units));
         
         % Roll peak values.
         plot(...

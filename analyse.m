@@ -18,7 +18,7 @@ function [t_mean, t_var, t_peaks, t_locs, f_peaks, f_locs] = analyse(t, data_t, 
 %   f_peaks - Peaks in frequency domain
 %   f_locs - Location of peaks
 %
-%   COPYRIGHT (C) Lauren Miller 2016
+% COPYRIGHT (C) Lauren Miller 2016
 
 % Conduct statistical analysis
 % Take absolute values

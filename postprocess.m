@@ -25,9 +25,7 @@ Gy = 2 * 9.81 * y / 2^7;
 Gz = 2 * 9.81 * z / 2^7;
 
 roll = atan(-1 * Gx ./ Gz); % Compute roll (rad)
-roll_d = rad2deg(roll);
 pitch = atan(Gy ./ sqrt(Gx.^2 + Gz.^2)); % Compute pitch (rad)
-pitch_d = rad2deg(pitch);
 
 [~, roll_f, ~, roll] = frequency(roll, Fs, t0); % Perform fft
 [f, pitch_f, t, pitch] = frequency(pitch, Fs, t0);
