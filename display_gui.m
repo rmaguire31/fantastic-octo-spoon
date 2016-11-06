@@ -45,7 +45,8 @@ capture_tabgroup = init_gui(...
     @save_capture,...
     @()set_config(config_fname),...
     @close_func,...
-    @toggle_units...
+    @toggle_units,...
+    @resample_time_series...
 );
 capture_fname = default_capture_fname;
 units = 'deg';
@@ -113,12 +114,25 @@ end
         update_capture_tabs(capture_fname, capture_tabgroup, units);
     end
 
+    function resample_time_series()
+        ts1 = resample(ts, time1, interp_method); % Conduct resampling
+        
+        ts1.time % Display time, data and interpolation method
+        ts1.data
+        ts1.getinterpmethod
+        
+        plot(ts,time,'*',ts1,time1,'o')
+        xlabel('Time (s)')
+        ylabel('Signal')
+        legend('Original','Resampled')
+    end
+
     function close_func()
         gui_alive = 0;
     end
 end
 
-function capture_tabgroup = init_gui(load_func, save_func, settings_func, close_func, units_func)
+function capture_tabgroup = init_gui(load_func, save_func, settings_func, close_func, units_func, resample_func)
 %% INIT_GUI
 %
 %
@@ -161,6 +175,12 @@ units_btn.String = 'Toggle Units';
 units_btn.Units = 'normalized';
 units_btn.Position = [0.05 0.525 0.9 0.1];
 units_btn.Callback = @(h,data)units_func();
+
+resample_btn = uicontrol(option_panel);
+resample_btn.String = 'Resample';
+resample_btn.Units = 'normalized';
+resample_btn.Position = [0.05 0.40 0.9 0.1];
+resample_btn.Callback = @(h,data)resample_func();
 
 
 % Capture tabs.
