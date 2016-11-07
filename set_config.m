@@ -116,7 +116,7 @@ catch e
             % Write new config file, populated with some default values.
             config = {};
             config{1} = struct();
-            config{1}.start_time_s = 1;
+            config{1}.start_time_s = 5;
             config{1}.sample_rate_hz = 100;
             config{1}.length = 200;
             jsondump(config, config_fname);
