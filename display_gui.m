@@ -129,6 +129,19 @@ end
     );
     end
 
+    function resample_time_series()
+        ts1 = resample(ts, time1, interp_method); % Conduct resampling
+        
+        ts1.time % Display time, data and interpolation method
+        ts1.data
+        ts1.getinterpmethod
+        
+        plot(ts,time,'*',ts1,time1,'o')
+        xlabel('Time (s)')
+        ylabel('Signal')
+        legend('Original','Resampled')
+    end
+
     function close_func()
     gui_alive = 0;
     end
