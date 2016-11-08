@@ -1,8 +1,15 @@
 function set_config(config_fname)
 %% SET_CONFIG
 %
+% DESCRIPTION
+%   Settings file is constructed to enable multiple captures and permit
+%   parameter changes.
+
+% INPUTS
+%   config_fname - Settings file reference.
 %
-%
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 % Sanity checks.
 if nargin < 1
@@ -81,8 +88,15 @@ end
 function [config, edit] = prompt_config(config)
 %% PROMPT_CONFIG
 %
+% DESCRIPTION
+%   User is allowed to conduct multiple captures at once and alter the
+%   settings for each one individually.
+% 
+% INPUTS
+%   config - Settings file.
 %
-%
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 prompts = cell(length(config), 1);
 for i = 1:length(prompts)
@@ -124,8 +138,14 @@ end
 function capture = prompt_capture(default_capture)
 %% PROMPT_CONFIG
 %
+% DESCRIPTION
+%   This includes the oringal settings file.
+% 
+% INPUTS
+%   default_capture - Capture utilises default parameters.
 %
-%
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 prompts = {
     'Capture Start Time (s):',...
@@ -194,8 +214,15 @@ end
 function config = get_config(config_fname)
 %% GET_CONFIG
 %
+% DESCRIPTION
+%   Locate existing configuration file and write a new one, populated with
+%   default values
+% 
+% INPUTS
+%   config_fname - Settings file reference
 %
-%
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 try
     % Parse existing config file.

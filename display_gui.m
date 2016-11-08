@@ -295,7 +295,7 @@ end
 % Postprocess and analyse captures.
 captures = cell(size(raw_captures));
 for i = 1:length(captures)
-%% RESAMPLE CAPTURE
+%% Resample time series.
     if ~isempty(fs)
         raw_captures{i}.x = resample(...
             raw_captures{i}.x,...
@@ -313,7 +313,7 @@ for i = 1:length(captures)
         raw_captures{i}.length = length(raw_captures{i}.x);
     end
     
-%% PROCESS CAPTURE
+%% Process capture.
     captures{i} = struct();
     [
         captures{i}.t,...
