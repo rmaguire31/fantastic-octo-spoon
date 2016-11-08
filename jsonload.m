@@ -23,6 +23,7 @@ end
 
 % Read JSON file in as a string.
 f = fopen(fname, 'r');
+c = onCleanup(@()fclose(f));
 s = fread(f, '*char')';
 
 if isempty(s)

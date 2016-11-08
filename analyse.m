@@ -1,4 +1,4 @@
-function [t_mean, t_var, t_peaks, t_locs, f_peaks, f_locs] = analyse(t, data_t, f, data_f)
+function [t_mean, t_var, t_peaks, t_locs, f_peaks, f_locs, t_max, f_max] = analyse(t, data_t, f, data_f)
 %% ANALYSE
 %
 % DESCRIPTION
@@ -38,5 +38,17 @@ else
     f_locs = [];
 end
 
-    
+% Find max values.
+t_max = max(data_t);
+if isempty(t_max)
+    t_max = 0;
+end
+
+% Find frequency with maximum power.
+f_max = f(data_f == max(data_f(2:end)));
+if isempty(f_max)
+    f_max = 0;
+end
+f_max = f_max(1);
+
     

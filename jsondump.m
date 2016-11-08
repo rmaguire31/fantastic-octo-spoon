@@ -23,7 +23,7 @@ if nargin < 2
 end
 
 f = fopen(fname, 'w+');
-
+c = onCleanup(@()fclose(f));
 writejson(json);
 
     function writejson(json)

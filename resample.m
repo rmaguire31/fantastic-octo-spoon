@@ -1,4 +1,4 @@
-vq = resample(v, ratio);
+function vq = resample(v, ratio)
 %% RESAMPLE
 %
 % DESCRIPTION
@@ -13,5 +13,5 @@ vq = resample(v, ratio);
 %
 % COPYRIGHT (C) Lauren Miller 2016
 
-xq = linspace(1, length(vi), length(vi) * ratio);
-vq = interp1(v, xq, 'spline');
+xq = linspace(1, length(v), length(v) * ratio);
+vq = interp1(v, xq, 'spline')';
