@@ -162,8 +162,20 @@ end
 function capture_tabgroup = init_gui(load_func, save_func, settings_func, close_func, resample_func, units_func)
 %% INIT_GUI
 %
+% DESCRIPTION
+%   GUI is structured with tabs such that it is straightforward to execute
+%   functions and changes.
+% INPUTS
+%   load_func - Captures are accessed.
+%   save_func - Captures are saved.
+%   settings_func - Configuration file imported from C and utilised to
+%                   alter parameters.
+%   close_func - Closes window.
+%   resample_func - Data resampled upon request.
+%   units_func - User can choose whether to work in degrees or radians.
 %
-%
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 % Create figure.
 f = figure('Visible', 'off');
@@ -232,7 +244,17 @@ end
 function cached_capture_fname = update_capture_tabs(cache_loc, capture_fname, capture_tabgroup, units, fs)
 %% UPDATE_CAPTURE_TABS
 %
+% DESCRIPTION
+%   New capture files located and update tabs accordingly.
+% INPUTS
+%   cache_loc - File location.
+%   capture_fname - Capture reference.
+%   capture_tabgroup - New capture tab.
+%   units - Units of capture.
+%   fs - Sample rate.
 %
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
+% 2016
 
 if nargin < 5
     fs = [];
@@ -273,7 +295,7 @@ end
 % Postprocess and analyse captures.
 captures = cell(size(raw_captures));
 for i = 1:length(captures)
-    %% Resample capture.
+%% RESAMPLE CAPTURE
     if ~isempty(fs)
         raw_captures{i}.x = resample(...
             raw_captures{i}.x,...
@@ -291,7 +313,7 @@ for i = 1:length(captures)
         raw_captures{i}.length = length(raw_captures{i}.x);
     end
     
-    %% Process capture.
+%% PROCESS CAPTURE
     captures{i} = struct();
     [
         captures{i}.t,...
