@@ -167,7 +167,7 @@ f.Name = 'Acceleration Data Capture Program';
 f.NumberTitle = 'off';
 f.MenuBar = 'none';
 f.ToolBar = 'none';
-f.Position(3:4) = [800, 600];
+f.Position = [300, 150, 800, 600];
 f.DeleteFcn = @(h,data)close_func();
 
 % Options.
