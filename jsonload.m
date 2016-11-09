@@ -261,7 +261,8 @@ json = parsejson(1);
                 % Empty array.
                 array = [];
             case {'MATLAB:cell2mat:MixedDataTypes',...
-                  'MATLAB:catenate:dimensionMismatch'}
+                  'MATLAB:catenate:dimensionMismatch',...
+                  'MATLAB:catenate:structFieldBad'}
                 % Cannot be represented by a matrix, leave as cell array.
             otherwise
                 rethrow(e)
