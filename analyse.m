@@ -28,7 +28,7 @@ t_var = abs(var(data_t));
 
 % Check for Statistics Toolbox and find peaks
 
-if exist('findpeaks','builtin')
+if exist('findpeaks') == 4
     [t_peaks,t_locs] = findpeaks(data_t,t,'SortStr','descend');
     [f_peaks,f_locs] = findpeaks(data_f,f,'SortStr','descend');
 else
