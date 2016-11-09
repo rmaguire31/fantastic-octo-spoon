@@ -22,8 +22,11 @@ if ~exist(fname, 'file')
 end
 
 % Read JSON file in as a string.
-f = fopen(fname, 'r');
+[f, msg] = fopen(fname, 'r');
 c = onCleanup(@()fclose(f));
+if f == -1
+    error('jsonload:fileNotFound', msg);
+end
 s = fread(f, '*char')';
 
 if isempty(s)

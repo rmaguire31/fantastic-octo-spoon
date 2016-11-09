@@ -22,8 +22,11 @@ if nargin < 2
           'No object specified. This function requires 2 inputs.');
 end
 
-f = fopen(fname, 'w+');
+[f, msg] = fopen(fname, 'w+');
 c = onCleanup(@()fclose(f));
+if f == -1
+    error('jsondump:fileNotFound', msg);
+end
 writejson(json);
 
     function writejson(json)
