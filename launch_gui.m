@@ -1,5 +1,5 @@
-function display_gui(mbed_loc, config_fname, mbed_capture_fname)
-%% DISPLAY_GUI
+function launch_gui(mbed_loc, config_fname, mbed_capture_fname)
+%% LAUNCH_GUI
 %
 % DESCRIPTION
 %   GUI interface to display analysed data and enable user to modify
@@ -216,8 +216,7 @@ function capture_tabgroup = init_gui(close_func, load_func, save_func, settings_
 %   resample_func - Data resampled upon request.
 %   units_func - User can choose whether to work in degrees or radians.
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Russell Maguire, Tom Poon 2016
 
 % Create figure.
 f = figure('Visible', 'off');
@@ -324,8 +323,7 @@ function cached_capture_fname = update_capture_tabs(cache_loc, capture_fname, ca
 %   units - Units of capture.
 %   fs - Sample rate.
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Russell Maguire, Lauren Miller, Tom Poon 2016
 
 if nargin < 5
     fs = [];

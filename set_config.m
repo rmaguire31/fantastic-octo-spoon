@@ -8,8 +8,7 @@ function set_config(config_fname)
 % INPUTS
 %   config_fname - Settings file reference.
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons 2016
 
 % Sanity checks.
 if nargin < 1
@@ -108,8 +107,7 @@ function config = get_config(config_fname)
 % INPUTS
 %   config_fname - Settings file reference
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Imi Ward Parsons 2016
 
 try
     % Parse existing config file.
@@ -141,8 +139,7 @@ function [config, done] = prompt_config(config)
 % INPUTS
 %   config - Settings file.
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller 2016
 
 % Display capture details as prompts, makes it easier for user to review
 % configuration.
@@ -199,8 +196,7 @@ function capture = prompt_capture(default_capture)
 % INPUTS
 %   default_capture - Capture utilises default parameters.
 %
-% COPYRIGHT (C) Russell Maguire, Imi Ward Parsons, Lauren Miller, Tom Poon
-% 2016
+% COPYRIGHT (C) Imi Ward Parsons 2016
 
 prompts = {
     'Capture Start Time (s):',...
